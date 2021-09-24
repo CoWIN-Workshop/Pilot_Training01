@@ -8,7 +8,7 @@ Connect the TTGO deivce to computer and follow [ESP32 Installation Manual](https
 
 ### Task 2: Include Arduino Libraries
 Try to download the Arduino libraries from [Library page](https://github.com/CoWIN-Workshop/Pilot_Training01/tree/main/Libraries)
-
+<img width="1056" alt="螢幕截圖 2021-09-24 下午1 40 24" src="https://user-images.githubusercontent.com/90884001/134624165-1674d8d5-5a78-485d-a787-55febad6d596.png">
 
 Add the libraries to Arduino IDE by clicking ```Sketch``` -> ```Include Library``` -> ```Add .ZIP Library```
 <img width="880" alt="Add zip libraries" src="https://user-images.githubusercontent.com/90884001/134623767-2cd22af6-be38-47b3-a863-75a3e451dac0.png">
