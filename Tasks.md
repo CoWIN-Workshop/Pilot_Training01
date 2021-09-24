@@ -138,7 +138,7 @@ void loop() {
   }
 ```
 ### Task 6: Setup ThingSpeak IoT Account
-Register for a free account on ThingSpeak webpage:
+Register for a free account on [ThingSpeak webpage](https://thingspeak.com) :
 <img width="1440" alt="Thinkspeak Register" src="https://user-images.githubusercontent.com/90884001/134031113-0e2d4c2d-ee16-433a-b769-2b3193462513.png">
 
 Set your own channel layout and request API for data sending:
