@@ -6,9 +6,13 @@
 ### Task 1: Test the device
 Connect the TTGO deivce to computer and follow [ESP32 Installation Manual](https://github.com/CoWIN-Workshop/Pilot_Training01/blob/main/ESP32_Installation.md) to setup the environment
 
-### Task 2
+### Task 2: Include Arduino Libraries
+Try to download the Arduino libraries from [Library page](https://github.com/CoWIN-Workshop/Pilot_Training01/tree/main/Libraries)
+<img width="1050" alt="Include libraries" src="https://user-images.githubusercontent.com/90884001/134622948-a99a5654-e5ad-4642-a792-c563e5036c40.png">
 
-### Task 2: Load the script for showing text on the monitor (SSD1306)
+Add the libraries to Arduino IDE by clicking ```Sketch``` -> 
+
+### Task 3: Load the script for showing text on the monitor (SSD1306)
 Test your device with this sample script
 Download here: [Monitor_SSD1306.ino](https://github.com/CoWIN-Workshop/Pilot_Training01/blob/main/Samples/Monitor_SSD1306.ino)
 
