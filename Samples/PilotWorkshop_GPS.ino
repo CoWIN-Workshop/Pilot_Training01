@@ -9,7 +9,7 @@
 #include <WiFi.h>
 #include <HTTPClient.h>            // For data upload
 
-#define FREQUENCY_TO_MEASURE 20000 // milliseconds
+#define INTERVAL_TO_MEASURE 20000 // milliseconds
 #define ONE_WIRE_BUS 25            // Thermometer is connected to pin 25
 
 /* WiFi and network settings */
@@ -22,7 +22,10 @@ static OneWire oneWire(ONE_WIRE_BUS);
 static DallasTemperature sensors(&oneWire);
 static AXP20X_Class AXP;
 static TinyGPSPlus GPS;
+
 static unsigned long int last_updated;
+static bool location_available, altitude_available;
+static float latitude, longitude, altitude;
 
 void setup(void) {
   Serial.begin(115200);
@@ -53,6 +56,7 @@ void setup(void) {
   }
   Serial.println("WiFi Connected");
   display.clear();
+  display.display();
 
   /*
     Turn on power of GPS module
@@ -73,12 +77,25 @@ void setup(void) {
   */
   Serial1.begin(9600, SERIAL_8N1, 34, 12);
 
-  last_updated = millis();
+  last_updated = millis() - INTERVAL_TO_MEASURE;
+  location_available = false;
+  altitude_available = false;
 }
 
-static void read_GPS_data(void) {
+static void process_GPS_data(void) {
   while (Serial1.available())
     GPS.encode(Serial1.read());
+}
+
+static void read_GPS(void) {
+  location_available = GPS.location.isValid() && GPS.location.isUpdated();
+  altitude_available = GPS.altitude.isValid() && GPS.altitude.isUpdated();
+  if (location_available) {
+    latitude = GPS.location.lat();
+    longitude = GPS.location.lng();
+  }
+  if (altitude_available)
+    altitude = GPS.altitude.meters();
 }
 
 void show_info(float tempC) {
@@ -92,9 +109,9 @@ void show_info(float tempC) {
   display.setFont(ArialMT_Plain_10);
   display.drawString(5, 35, "Temperature: "+String(tempC)+" C");
   Serial.println(tempC);
-  if (GPS.location.isValid()) {
+  if (location_available) {
     char buffer[32];
-    snprintf(buffer, sizeof buffer, "%f,%f", GPS.location.lat(), GPS.location.lng());
+    snprintf(buffer, sizeof buffer, "%f,%f", latitude, longitude);
     display.drawString(5, 50, buffer);
   } else {
     display.drawString(5, 50, "No GPS");
@@ -113,12 +130,22 @@ static void upload_data(float tempC) {
   HTTPClient http;
 
   String url_with_data = url+"&field1="+tempC;
-  if (GPS.location.isValid() && GPS.location.isUpdated()) {
-    url_with_data += "&latitude="+String(GPS.location.lat(), 6);
-    url_with_data += "&longitude="+String(GPS.location.lng(), 6);
+  if (location_available) {
+    url_with_data += "&latitude="+String(latitude, 6);
+    url_with_data += "&longitude="+String(longitude, 6);
   }
-  if (GPS.altitude.isValid() && GPS.altitude.isUpdated()) {
-    url_with_data += "&elevation="+String(GPS.altitude.meters(), 6);
+  if (altitude_available) {
+    url_with_data += "&elevation="+String(altitude, 6);
+  }
+  if (GPS.date.isValid() && GPS.time.isValid()) {
+    char buffer[64];
+    snprintf(
+      buffer, sizeof buffer,
+      "&time=%04u%02u%02uT%02u%02u%02u",
+      GPS.date.year(), GPS.date.month(), GPS.date.day(),
+      GPS.time.hour(), GPS.time.minute(), GPS.time.second()
+    );
+    url_with_data += buffer;
   }
   Serial.println(url_with_data);
 
@@ -135,11 +162,12 @@ static void upload_data(float tempC) {
 }
 
 void loop(void) {
-  read_GPS_data();
+  process_GPS_data();
   unsigned long int now = millis();
-  if (now - last_updated > FREQUENCY_TO_MEASURE) {
+  if (now - last_updated > INTERVAL_TO_MEASURE) {
     sensors.requestTemperatures();
     float tempC = sensors.getTempCByIndex(0);
+    read_GPS();
     show_info(tempC);
     upload_data(tempC);
     last_updated = now;
