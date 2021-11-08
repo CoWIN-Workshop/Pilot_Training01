@@ -1,7 +1,7 @@
 # Pilot_Training
 Welcome to HKU – Geography/STEM Pilot Workshop 
 
-2021 - 09 - 25 (Sat)
+2021 - 09 - 25 (Sat) & 2021 - 11 - 20 (Sat)
 
 ********************************************************************
 
@@ -19,10 +19,11 @@ Activities include:
 
 **Day 2**
 
-5) Group sharing and discussion,
-6) Arduino programming,
-7) Field sampling – Weather Orienteering at HKU, and
-8) GPS positioning and data analysis
+5) Discussion on the design of sensors’ enclosure + any difficulties faced
+6) Basic Arduino Programming
+7) Introduction to GPS positioning
+8) Field sampling – weather orienteering at HKU
+9) Data analysis and visualization
 
 Throughout the workshop, you will be able to:
 
