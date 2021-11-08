@@ -2,6 +2,7 @@
 ********************************************************************
 
 ### Task 1: Group Presentation
+--> Refer to powerpoint slides
 
 ### Task 2: Arduino Programming
 
@@ -357,3 +358,4 @@ B: Put your sensors side-by-side to our stationary sensor (At 2 collocation poin
 
 
 ### Task 5: Data Downloading + Visualization
+--> Refer to powerpoint slides
