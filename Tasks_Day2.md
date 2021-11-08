@@ -86,15 +86,24 @@ void setup() {
 // *** Step 4: You can develop a function for convenience:
 
 void wifi(void) {                                                    // Set up a function called wifi
-    Serial.println("Start connection");                              // Print out a notice on Serial monitor tell you the sensor starting the conection
+
+    Serial.println("Start connection");                              // Print out a notice on Serial monitor tell 
+                                                                     // you the sensor starting the conection
+                                                                     
     HTTPClient http;                                                 // Start to connect with the network
-    wifirssi = WiFi.RSSI();                                          // Receive the signal strength and stored as variable: wifirssi
+    
+    wifirssi = WiFi.RSSI();                                          // Receive the signal strength and stored as 
+                                                                     // variable: wifirssi
     
     sensors.requestTemperatures();       
-    float tempC = sensors.getTempCByIndex(0);                        // Receive the temperature data and stored as variable: tempC
-    float tempCorrected = slope*tempC + intercept;                   // %%% Task B: Edit with your own calibrated results: y = mx + c (linear equation)
+    float tempC = sensors.getTempCByIndex(0);                        // Receive the temperature data and stored 
+                                                                     // as variable: tempC
+                                                                     
+    float tempCorrected = slope*tempC + intercept;                   // %%% Task B: Edit with your own calibrated 
+                                                                     // results: y = mx + c (linear equation)
      
-    String url1 = url + "&field1=" + tempCorrected + "&field2=" + wifirssi;  // Construct a string that to be submitted to thingspeak
+    String url1 = url + "&field1=" + tempCorrected + "&field2=" + wifirssi;  // Construct a string that to be 
+                                                                             // submitted to thingspeak
     http.begin(url1);
     Serial.println(url1);
 
@@ -110,11 +119,16 @@ void wifi(void) {                                                    // Set up a
     }
     http.end();
 
-    display.clear();                                                               // Clear the text or graphics on OLED screen
-    display.setTextAlignment(TEXT_ALIGN_LEFT);                                     // Setup orientation and font size of your text on OLED screen
+    display.clear();                                                // Clear the text or graphics on OLED screen
+    
+    display.setTextAlignment(TEXT_ALIGN_LEFT);                      // Setup orientation and font size of your text 
+                                                                    // on OLED screen
     display.setFont(ArialMT_Plain_16); 
-    display.drawString(10, 5, "HKU Wi-Fi");                                        // %%% Task C: You may try to edit your school name here    
-    display.drawHorizontalLine(0, 30, 150);                                        // A solid line will be drawn to separate your school name and measurement data
+    display.drawString(10, 5, "HKU Wi-Fi");                         // %%% Task C: You may try to edit your 
+                                                                    //             school name here    
+                                                                    
+    display.drawHorizontalLine(0, 30, 150);                         // A solid line will be drawn to separate 
+                                                                    // your school name and measurement data
     display.setFont(ArialMT_Plain_16);
     display.drawString(5, 45, "Temp: "+String(tempCorrected)+" "+(char)247+"C");
     Serial.println(tempC);
