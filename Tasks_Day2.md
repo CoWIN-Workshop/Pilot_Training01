@@ -351,7 +351,7 @@ void loop(void) {
 
 A: 5 portals were setup inside the HKU campus, please find all the portal and complete the tasks there.
 
-B: Put your sensors side-by-side to our stationary sensor for ## 5 Minutes
+B: Put your sensors side-by-side to our stationary sensor for ```5 Minutes```
 
 <img width="688" alt="螢幕截圖 2021-11-08 下午10 39 46" src="https://user-images.githubusercontent.com/90884001/140761847-48142a64-be5e-4d90-b2ac-b29550ccb9f8.png">
 
