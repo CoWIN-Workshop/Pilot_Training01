@@ -141,7 +141,8 @@ void wifi(void) {                                                    // Set up a
 
 void loop() { 
   wifi();                    // Call to run the function "wifi"
-  delay(20000);              // %%% Task D: You can setup your own delay time for the loop, 1000 ms = 1 second -> 20000 ms = 20 seconds. 
+  delay(20000);              // %%% Task D: You can setup your own delay time for the loop, 
+                             //             1000 ms = 1 second -> 20000 ms = 20 seconds. 
                              //             Let's say I need to send data every minute, what should I set?
   }
 ```
