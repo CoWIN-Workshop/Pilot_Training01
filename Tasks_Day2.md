@@ -332,6 +332,7 @@ void loop(void) {
 }
 ```
 
-### Task 4: Field Sampling - HKU Orientiating
+### Task 4: Field Sampling - HKU Weather Orienteering
+
 
 ### Task 5: Data Downloading + Visualization
