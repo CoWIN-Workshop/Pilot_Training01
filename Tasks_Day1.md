@@ -1,4 +1,4 @@
-# Tasks for Day 1
+# Agenda for Day 1
 ********************************************************************
 
 ### Task 0: Installation of Arduino IDE
