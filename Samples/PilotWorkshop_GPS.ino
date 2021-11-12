@@ -1,4 +1,3 @@
-// Include the required Arduino libraries:
 #include <Arduino.h>
 #include <Wire.h>
 #include <axp20x.h>                // Power management
@@ -131,17 +130,17 @@ static void upload_data(float tempC) {
 
   String url_with_data = url+"&field1="+tempC;
   if (location_available) {
-    url_with_data += "&latitude="+String(latitude, 6);
-    url_with_data += "&longitude="+String(longitude, 6);
+    url_with_data += "&field2="+String(latitude, 6);
+    url_with_data += "&field3="+String(longitude, 6);
   }
   if (altitude_available) {
-    url_with_data += "&elevation="+String(altitude, 6);
+    url_with_data += "&field4="+String(altitude, 6);
   }
   if (GPS.date.isValid() && GPS.time.isValid()) {
     char buffer[64];
     snprintf(
       buffer, sizeof buffer,
-      "&time=%04u%02u%02uT%02u%02u%02u",
+      "&field5=%04u%02u%02uT%02u%02u%02u",
       GPS.date.year(), GPS.date.month(), GPS.date.day(),
       GPS.time.hour(), GPS.time.minute(), GPS.time.second()
     );
