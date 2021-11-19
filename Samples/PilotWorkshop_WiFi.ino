@@ -30,40 +30,38 @@ char password[] = ""; //Edit your Wi-Fi password
 String url = "http://api.thingspeak.com/update?api_key=XXXXXXXX"; //Edit your API Key
 
 void wifi(void) {
-    Serial.println("Start connection");
-    HTTPClient http;
-    wifirssi = WiFi.RSSI();
-    
-    sensors.requestTemperatures();
-    float tempC = sensors.getTempCByIndex(0);
-    
-    String url1 = url + "&field1=" + tempC + "&field2=" + wifirssi;
-    http.begin(url1);
-    Serial.println(url1);
+  Serial.println("Start connection");
+  HTTPClient http;
+  wifirssi = WiFi.RSSI();
+  
+  sensors.requestTemperatures();
+  float tempC = sensors.getTempCByIndex(0);
+  
+  String url1 = url + "&field1=" + tempC + "&field2=" + wifirssi;
+  Serial.println(url1);
+  http.begin(url1);
 
-    int httpCode = http.GET();
-    if (httpCode == HTTP_CODE_OK)      {
-    
-      String payload = http.getString();
-    
-      Serial.print("Webpage Content=");
-      Serial.println(payload);
-    } else {
-      Serial.println("Transmission Failed");
-    }
-    http.end();
+  int httpCode = http.GET();
+  if (httpCode == HTTP_CODE_OK)      {
+    String payload = http.getString();
+    Serial.print("Webpage Content=");
+    Serial.println(payload);
+  } else {
+    Serial.println("Transmission Failed");
+  }
+  http.end();
 
-    display.clear();
-    display.setTextAlignment(TEXT_ALIGN_LEFT);
-    display.setFont(ArialMT_Plain_16);
-    display.drawString(10, 5, "HKU Wi-Fi");  //Try to edit your school name here 
-    display.drawHorizontalLine(0, 30, 150);
-    display.setFont(ArialMT_Plain_16);
-    display.drawString(5, 45, "Temp: "+String(tempC)+" "+(char)247+"C");
-    Serial.println(tempC);
-    
-    display.display();
-  };
+  display.clear();
+  display.setTextAlignment(TEXT_ALIGN_LEFT);
+  display.setFont(ArialMT_Plain_16);
+  display.drawString(10, 5, "HKU Wi-Fi");  //Try to edit your school name here 
+  display.drawHorizontalLine(0, 30, 150);
+  display.setFont(ArialMT_Plain_16);
+  display.drawString(5, 45, "Temp: "+String(tempC)+" "+(char)247+"C");
+  Serial.println(tempC);
+  
+  display.display();
+};
 
 void setup(void) {
   Serial.begin(115200);
