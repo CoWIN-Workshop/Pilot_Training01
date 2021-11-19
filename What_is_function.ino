@@ -1,14 +1,15 @@
-int sum_func (int x, int y) // function declaration {
+int result;
+
+int sum_of(int x, int y) { // function declaration
    int z = 0;
-   z = x+y ;
+   z = x + y;
    return z; // return the value
 }
 
 void setup () {
-   Statements // group of statements
+   result = 0; // group of statements
 }
 
-Void loop () {
-   int result = 0 ;
-   result = Sum_func (5,6) ; // function call
+void loop () {
+   result = sum_of(5, 6); // function call
 }
