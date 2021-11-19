@@ -1,11 +1,11 @@
 // Include the required Arduino libraries:
-#include <SPI.h>
+#include <SPI.h>                    // Serial Peripheral Interface
 #include <Wire.h>          
-#include "SSD1306Wire.h"            //For SSD1306 Monitor
+#include "SSD1306Wire.h"            // For SSD1306 Monitor
 
-#include <OneWire.h>                //For DS18B20 Thermometer
-#include <DallasTemperature.h>      //For DS18B20 Thermometer
-#define ONE_WIRE_BUS 25            //Connect DS18B20 to pin 25
+#include <OneWire.h>                // For DS18B20 Thermometer
+#include <DallasTemperature.h>      // For DS18B20 Thermometer
+#define ONE_WIRE_BUS 25             // DS18B20 is connected to pin 25
 
 #include <WiFi.h>
 #include <HTTPClient.h>
@@ -65,7 +65,7 @@ void wifi(void) {
     display.display();
   };
 
-void setup() {
+void setup(void) {
   Serial.begin(115200);
   sensors.begin();
   display.init();
@@ -79,7 +79,7 @@ void setup() {
   Serial.println("WiFi Connected");
 }
 
-void loop() { 
+void loop(void) {
   wifi();
   delay(20000);
-  }
+}
