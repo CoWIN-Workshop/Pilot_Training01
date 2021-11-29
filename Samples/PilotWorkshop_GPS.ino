@@ -79,6 +79,28 @@ void setup(void) {
   last_updated = millis() - INTERVAL_TO_MEASURE;
   location_available = false;
   altitude_available = false;
+
+  /*
+    UBX Protocol
+    Message: CFG-CFG (clear, save and load configurations)
+    Header: B5 62
+    ID: 06 09
+
+    Length of payload: 000D (bytes)
+    clear mask: 0000FFFF
+    save mask: 00000000
+    load mask: 0000FFFF
+    device mask: 04
+
+    Checksum A: 1C
+    Checksum B: 9B
+  */
+  static byte const UBX_CFG_CFG[] = {
+    0xB5, 0x62, 0x06, 0x09, 0x0D, 0x00, 0xFF, 0xFF,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF,
+    0x00, 0x00, 0x04, 0x1C, 0x9B
+  };
+  Serial1.write(UBX_CFG_CFG, sizeof UBX_CFG_CFG);
 }
 
 static void process_GPS_data(void) {
